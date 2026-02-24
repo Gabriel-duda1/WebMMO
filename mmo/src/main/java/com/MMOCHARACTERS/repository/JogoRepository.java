@@ -1,5 +1,7 @@
 package com.MMOCHARACTERS.repository;
 
-public class JogoRepository {
-    
+import com.MMOCHARACTERS.model.Jogo;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface JogoRepository extends JpaRepository<Jogo, Long> {
 }
