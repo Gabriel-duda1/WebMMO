@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Jogos</title>
+</head>
+<body>
+    <h1>Jogos Cadastrados</h1>
+
+    <ul>
+        <li th:each="jogo : ${jogos}">
+            <span th:text="${jogo.nome}"></span> - 
+            <span th:text="${jogo.genero}"></span>
+        </li>
+    </ul>
+
+    <p><a th:href="@{/}">Voltar</a></p>
+</body>
+</html>

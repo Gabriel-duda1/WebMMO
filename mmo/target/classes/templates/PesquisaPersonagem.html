@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pesquisar Personagens</title>
+</head>
+<body>
+    <h1>Pesquisar Personagens</h1>
+
+    <form th:action="@{/personagens/buscar}" method="get">
+        <input type="text" name="nome" placeholder="Digite o nome..."/>
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    <div id="resultados">
+        <ul>
+            <li th:each="personagem : ${personagens}">
+                <a th:href="@{/personagens/{id}(id=${personagem.id})}" th:text="${personagem.nome}"></a>
+            </li>
+        </ul>
+    </div>
+
+    <p><a th:href="@{/personagens/home}">Voltar</a></p>
+</body>
+</html>

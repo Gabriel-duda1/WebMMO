@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Criar Personagem</title>
+</head>
+<body>
+    <h1>Novo Personagem</h1>
+
+    <form th:action="@{/personagens/salvar}" method="post" th:object="${personagem}" enctype="multipart/form-data">
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" />
+
+        <label>Classe:</label>
+        <input type="text" th:field="*{classe}" />
+
+        <label>Descrição:</label>
+        <textarea th:field="*{descricao}"></textarea>
+
+        <label>Jogo:</label>
+        <select th:field="*{jogo.id}">
+            <option th:each="jogo : ${jogos}" th:value="${jogo.id}" th:text="${jogo.nome}"></option>
+        </select>
+
+        <label>Imagem:</label>
+        <input type="file" name="imagem" />
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <p><a th:href="@{/gamer/home}">Voltar</a></p>
+</body>
+</html>

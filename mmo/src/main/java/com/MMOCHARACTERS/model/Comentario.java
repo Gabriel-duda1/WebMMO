@@ -1,62 +1,51 @@
 package com.MMOCHARACTERS.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "comentario")
 public class Comentario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String conteudo;
-    private LocalDateTime dataHora;
+
+    @Column(name = "data_criacao", nullable = false)
+    private LocalDateTime dataCriacao;
 
     @ManyToOne
-    @JoinColumn(name = "personagem_id")
+    @JoinColumn(name = "personagem_id", nullable = false)
     private Personagem personagem;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
-    public Long getId() {
-        return id;
-    }
+    public Comentario() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getConteudo() {
-        return conteudo;
-    }
-
-    public void setConteudo(String conteudo) {
+    public Comentario(String conteudo, LocalDateTime dataCriacao, Personagem personagem, Post post) {
         this.conteudo = conteudo;
-    }
-
-    public LocalDateTime getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
-    }
-
-    public Personagem getPersonagem() {
-        return personagem;
-    }
-
-    public void setPersonagem(Personagem personagem) {
+        this.dataCriacao = dataCriacao;
         this.personagem = personagem;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
         this.post = post;
     }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getConteudo() { return conteudo; }
+    public void setConteudo(String conteudo) { this.conteudo = conteudo; }
+
+    public LocalDateTime getDataCriacao() { return dataCriacao; }
+    public void setDataCriacao(LocalDateTime dataCriacao) { this.dataCriacao = dataCriacao; }
+
+    public Personagem getPersonagem() { return personagem; }
+    public void setPersonagem(Personagem personagem) { this.personagem = personagem; }
+
+    public Post getPost() { return post; }
+    public void setPost(Post post) { this.post = post; }
 }

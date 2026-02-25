@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Gamers</title>
+</head>
+<body>
+    <h1>Gamers Cadastrados</h1>
+
+    <ul>
+        <li th:each="gamer : ${gamers}">
+            <span th:text="${gamer.nome}"></span> - 
+            <span th:text="${gamer.email}"></span>
+        </li>
+    </ul>
+
+    <p><a th:href="@{/}">Voltar</a></p>
+</body>
+</html>

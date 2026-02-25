@@ -17,7 +17,7 @@ public class ComentarioService {
     }
 
     public Comentario salvar(Comentario comentario) {
-        comentario.setDataHora(LocalDateTime.now());
+        comentario.setDataCriacao(LocalDateTime.now());
         return comentarioRepository.save(comentario);
     }
 

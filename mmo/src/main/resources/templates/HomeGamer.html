@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gamer Home</title>
+</head>
+<body>
+    <h1>Seus Personagens</h1>
+
+    <a th:href="@{/personagens/novo}">Criar Novo Personagem</a>
+
+    <div id="listaPersonagens">
+        <ul>
+            <li th:each="personagem : ${personagens}">
+                <a th:href="@{/personagens/{id}(id=${personagem.id})}" th:text="${personagem.nome}"></a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

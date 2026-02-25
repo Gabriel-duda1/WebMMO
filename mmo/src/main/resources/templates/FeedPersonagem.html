@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Timeline do Personagem</title>
+</head>
+<body>
+    <h1>Feed</h1>
+
+    <a th:href="@{/posts/novo}">Novo Post</a>
+    <a th:href="@{/personagens/pesquisar}">Pesquisar Personagens</a>
+
+    <div id="feedPosts">
+        <ul>
+            <li th:each="post : ${posts}">
+                <a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.titulo}"></a>
+                <p th:text="${post.conteudo}"></p>
+                <span th:text="${post.autor.nome}"></span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

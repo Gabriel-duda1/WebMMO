@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Perfil do Personagem</title>
+</head>
+<body>
+    <h1>Perfil</h1>
+
+    <img th:src="@{/imagens/{id}(id=${personagem.id})}" alt="Foto do Personagem"/>
+    <h2 th:text="${personagem.nome}"></h2>
+    <p>Jogo: <span th:text="${personagem.jogo.nome}"></span></p>
+
+    <form th:action="@{/personagens/{id}/seguir(id=${personagem.id})}" method="post">
+        <button type="submit">Seguir</button>
+    </form>
+
+    <h3>Posts</h3>
+    <div id="postsPerfil">
+        <ul>
+            <li th:each="post : ${posts}">
+                <a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.titulo}"></a>
+                <p th:text="${post.conteudo}"></p>
+            </li>
+        </ul>
+    </div>
+
+    <p><a th:href="@{/personagens/home}">Voltar</a></p>
+</body>
+</html>

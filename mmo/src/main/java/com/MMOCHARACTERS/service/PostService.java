@@ -17,7 +17,7 @@ public class PostService {
     }
 
     public Post salvar(Post post) {
-        post.setDataHora(LocalDateTime.now());
+        post.setDataCriacao(LocalDateTime.now());
         return postRepository.save(post);
     }
 

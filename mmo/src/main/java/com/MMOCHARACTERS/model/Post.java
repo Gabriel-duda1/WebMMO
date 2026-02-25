@@ -5,16 +5,21 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "post")
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String conteudo;
-    private LocalDateTime dataHora;
+
+    @Column(name = "data_criacao", nullable = false)
+    private LocalDateTime dataCriacao;
 
     @ManyToOne
-    @JoinColumn(name = "personagem_id")
+    @JoinColumn(name = "personagem_id", nullable = false)
     private Personagem personagem;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
@@ -23,51 +28,29 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Curtida> curtidas;
 
-    public Long getId() {
-        return id;
-    }
+    public Post() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getConteudo() {
-        return conteudo;
-    }
-
-    public void setConteudo(String conteudo) {
+    public Post(String conteudo, LocalDateTime dataCriacao, Personagem personagem) {
         this.conteudo = conteudo;
-    }
-
-    public LocalDateTime getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
-    }
-
-    public Personagem getPersonagem() {
-        return personagem;
-    }
-
-    public void setPersonagem(Personagem personagem) {
+        this.dataCriacao = dataCriacao;
         this.personagem = personagem;
     }
 
-    public List<Comentario> getComentarios() {
-        return comentarios;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setComentarios(List<Comentario> comentarios) {
-        this.comentarios = comentarios;
-    }
+    public String getConteudo() { return conteudo; }
+    public void setConteudo(String conteudo) { this.conteudo = conteudo; }
 
-    public List<Curtida> getCurtidas() {
-        return curtidas;
-    }
+    public LocalDateTime getDataCriacao() { return dataCriacao; }
+    public void setDataCriacao(LocalDateTime dataCriacao) { this.dataCriacao = dataCriacao; }
 
-    public void setCurtidas(List<Curtida> curtidas) {
-        this.curtidas = curtidas;
-    }
+    public Personagem getPersonagem() { return personagem; }
+    public void setPersonagem(Personagem personagem) { this.personagem = personagem; }
+
+    public List<Comentario> getComentarios() { return comentarios; }
+    public void setComentarios(List<Comentario> comentarios) { this.comentarios = comentarios; }
+
+    public List<Curtida> getCurtidas() { return curtidas; }
+    public void setCurtidas(List<Curtida> curtidas) { this.curtidas = curtidas; }
 }

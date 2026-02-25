@@ -3,40 +3,30 @@ package com.MMOCHARACTERS.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "personagem_seguidor")
+@IdClass(PersonagemSeguidorId.class)
 public class PersonagemSeguidor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "seguidor_id")
+    @JoinColumn(name = "personagem_id", nullable = false)
+    private Personagem personagem;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "seguidor_id", nullable = false)
     private Personagem seguidor;
 
-    @ManyToOne
-    @JoinColumn(name = "seguido_id")
-    private Personagem seguido;
+    public PersonagemSeguidor() {}
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Personagem getSeguidor() {
-        return seguidor;
-    }
-
-    public void setSeguidor(Personagem seguidor) {
+    public PersonagemSeguidor(Personagem personagem, Personagem seguidor) {
+        this.personagem = personagem;
         this.seguidor = seguidor;
     }
 
-    public Personagem getSeguido() {
-        return seguido;
-    }
+    public Personagem getPersonagem() { return personagem; }
+    public void setPersonagem(Personagem personagem) { this.personagem = personagem; }
 
-    public void setSeguido(Personagem seguido) {
-        this.seguido = seguido;
-    }
+    public Personagem getSeguidor() { return seguidor; }
+    public void setSeguidor(Personagem seguidor) { this.seguidor = seguidor; }
 }
