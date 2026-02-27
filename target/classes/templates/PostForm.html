@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Criar Post</title>
+</head>
+<body>
+    <h1>Novo Post</h1>
+
+    <form th:action="@{/posts/salvar}" method="post" th:object="${post}">
+        <textarea th:field="*{conteudo}" placeholder="Escreva algo..."></textarea>
+        <button type="submit">Publicar</button>
+    </form>
+
+    <p><a th:href="@{/personagens/home}">Voltar</a></p>
+</body>
+</html>

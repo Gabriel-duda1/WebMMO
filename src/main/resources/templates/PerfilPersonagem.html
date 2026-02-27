@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${personagem.nome} + ' - Perfil'">Personagem</title>
+</head>
+<body>
+    <h1 th:text="${personagem.nome}">Nome Personagem</h1>
+    <p>Classe: <span th:text="${personagem.classe}"></span></p>
+    <p>Nível: <span th:text="${personagem.nivel}"></span></p>
+
+    <h2>Posts</h2>
+    <div th:each="post : ${personagem.posts}">
+        <p th:text="${post.conteudo}">Conteúdo do post</p>
+        <p>Data: <span th:text="${post.dataCriacao}"></span></p>
+        <p>Curtidas: <span th:text="${#lists.size(post.curtidas)}"></span></p>
+
+        <!-- Curtir / Descurtir -->
+        <form th:action="@{'/curtida/' + ${post.id}}" method="post">
+            <button type="submit">Curtir</button>
+        </form>
+
+        <!-- Comentários -->
+        <div th:each="c : ${post.comentarios}">
+            <strong th:text="${c.personagem.nome}">Autor</strong>: <span th:text="${c.conteudo}">Comentário</span>
+        </div>
+
+        <!-- Criar comentário -->
+        <form th:action="@{'/comentario/' + ${post.id}}" method="post">
+            <input type="text" name="conteudo" placeholder="Comentário" required/>
+            <button type="submit">Comentar</button>
+        </form>
+    </div>
+
+    <h2>Criar Novo Post</h2>
+    <form th:action="@{'/personagem/' + ${personagem.id} + '/post'}" method="post">
+        <textarea name="conteudo" placeholder="Escreva algo..." required></textarea>
+        <br/>
+        <button type="submit">Postar</button>
+    </form>
+
+    <h2>Seguindo</h2>
+    <div th:each="s : ${personagem.seguindo}">
+        <span th:text="${s.seguido.nome}">Nome Seguido</span>
+    </div>
+
+    <h2>Seguidores</h2>
+    <div th:each="s : ${personagem.seguidores}">
+        <span th:text="${s.seguidor.nome}">Nome Seguidor</span>
+    </div>
+
+    <h2>Seguir Personagem</h2>
+    <form th:action="@{'/personagem/seguir/' + ${personagem.id}}" method="post">
+        <input type="hidden" name="idSeguido" th:value="${personagem.id}"/>
+        <button type="submit">Seguir</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${personagem.nome} + ' - MMO Characters'">Personagem</title>
+</head>
+<body>
+    <h2 th:text="${personagem.nome}">Nome Personagem</h2>
+    <p>Classe: <span th:text="${personagem.classe}"></span></p>
+    <p>Nível: <span th:text="${personagem.nivel}"></span></p>
+
+    <h3>Posts</h3>
+    <div th:each="post : ${personagem.posts}">
+        <p th:text="${post.conteudo}">Conteúdo do post</p>
+        <p>Data: <span th:text="${post.dataCriacao}"></span></p>
+        <p>Curtidas: <span th:text="${#lists.size(post.curtidas)}"></span></p>
+
+        <form th:action="@{'/curtida/' + ${post.id} }" method="post">
+            <button type="submit">Curtir</button>
+        </form>
+
+        <div th:each="c : ${post.comentarios}">
+            <p><strong th:text="${c.personagem.nome}"></strong>: <span th:text="${c.conteudo}"></span></p>
+        </div>
+
+        <form th:action="@{'/comentario/' + ${post.id}}" method="post">
+            <input type="text" name="conteudo" placeholder="Comentário" required/>
+            <button type="submit">Comentar</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro - MMO Characters</title>
+</head>
+<body>
+    <h2>Cadastro de Usuário</h2>
+    <form th:action="@{/cadastro}" th:object="${usuario}" method="post">
+        <div>
+            <label>Username:</label>
+            <input type="text" th:field="*{username}" placeholder="Username" required/>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" placeholder="Email" required/>
+        </div>
+        <div>
+            <label>Senha:</label>
+            <input type="password" th:field="*{senha}" placeholder="Senha" required/>
+        </div>
+        <div>
+            <button type="submit">Cadastrar</button>
+        </div>
+    </form>
+    <p th:if="${erro}" th:text="${erro}"></p>
+    <p>Já tem conta? <a th:href="@{/login}">Login</a></p>
+</body>
+</html>

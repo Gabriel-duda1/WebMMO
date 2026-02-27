@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhe do Post</title>
+</head>
+<body>
+    <h1 th:text="${post.titulo}"></h1>
+    <p th:text="${post.conteudo}"></p>
+    <span>Autor: <span th:text="${post.autor.nome}"></span></span>
+
+    <form th:action="@{/posts/{id}/curtir(id=${post.id})}" method="post">
+        <button type="submit">Curtir</button>
+    </form>
+
+    <h3>Comentários</h3>
+    <ul>
+        <li th:each="comentario : ${comentarios}">
+            <span th:text="${comentario.autor.nome}"></span>: 
+            <span th:text="${comentario.texto}"></span>
+        </li>
+    </ul>
+
+    <form th:action="@{/posts/{id}/comentar(id=${post.id})}" method="post" th:object="${comentario}">
+        <textarea th:field="*{texto}"></textarea>
+        <button type="submit">Comentar</button>
+    </form>
+
+    <p><a th:href="@{/personagens/feed}">Voltar ao Feed</a></p>
+</body>
+</html>
